@@ -61,6 +61,8 @@
         builder.serverURL = [NSURL URLWithString:serverURL];
         builder.room = room;
         
+        [builder setFeatureFlag:@"help.enabled" withBoolean: false];
+        
         NSString *subject = [meetingOptions objectForKey:@"subject"];
         if([subject isEqual:nil] == false){
             builder.subject = subject;
