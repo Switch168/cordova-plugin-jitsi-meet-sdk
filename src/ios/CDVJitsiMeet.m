@@ -64,6 +64,9 @@
         NSString *subject = [meetingOptions objectForKey:@"subject"];
         if([subject isEqual:nil] == false){
             builder.subject = subject;
+            JitsiMeetUserInfo *userInfo = [JitsiMeetUserInfo init];
+            userInfo.displayName = subject;
+            builder.userInfo = userInfo;
         }
         NSString *token = [meetingOptions objectForKey:@"token"];
         if([token isEqual:nil] == false){
