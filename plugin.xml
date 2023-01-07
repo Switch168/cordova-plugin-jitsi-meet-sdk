@@ -50,6 +50,8 @@
 
 		<framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
+    
+    
 
     <!-- ios -->
     <platform name="ios">
@@ -73,6 +75,10 @@
 
         <header-file src="src/ios/CDVJitsiMeet.h" />
         <source-file src="src/ios/CDVJitsiMeet.m" />
+        <source-file src="src/ios/PiPViewCoordinator.swift" />
+        <source-file src="src/ios/DragGestureController.swift" />
+
+
 
         <podspec>
             <pods use-frameworks="true" >
@@ -80,5 +86,8 @@
             </pods>
         </podspec>
 
+
     </platform>
+
+    <hook type="after_plugin_add" src="scripts/changeAppNameInHeader.js" />
 </plugin>

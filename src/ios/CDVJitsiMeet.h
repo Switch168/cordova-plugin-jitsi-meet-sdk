@@ -20,6 +20,7 @@
  */
 
 #import <Cordova/CDVPlugin.h>
+#import "APP_NAME-Swift.h"
 @import JitsiMeetSDK;
 
 @interface CDVJitsiMeet : CDVPlugin <JitsiMeetViewDelegate>
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) NSString *room;
 @property (nonatomic, strong) JitsiMeetView *jitsiMeetView;
 @property (nonatomic, strong) NSString *lastCallbackId;
+@property (nonatomic, strong) PiPViewCoordinator *pipViewCoordinator;
 @property (nonatomic, strong) CDVPluginResult* result;
 
 // Start che jitsi meet conference

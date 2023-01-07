@@ -20,9 +20,14 @@
  */
 
 #import "CDVJitsiMeet.h"
+#import "APP_NAME-Swift.h"
 
 @implementation CDVJitsiMeet
 
+- (void)enterPictureInPicture:(NSDictionary *)data
+{
+    [self.pipViewCoordinator enterPictureInPicture];
+}
 - (void)startConference:(CDVInvokedUrlCommand*)command
 {
     NSDictionary* meetingOptions = [command.arguments objectAtIndex:0];
@@ -95,13 +100,35 @@
 
             }
         }
+        BOOL pipEnabled = [[flags objectForKey:@"pip.enabled"] boolValue];
+        if(pipEnabled){
+            self.pipViewCoordinator = [[PiPViewCoordinator alloc] initWithView: self.jitsiMeetView];
+            [self.pipViewCoordinator configureAsStickyViewWithParentView: self.topViewController.view];
+        }
     }];
 
     [self.jitsiMeetView join:options];
-    
     [self.viewController.view addSubview:self.jitsiMeetView];
 }
 
+- (UIViewController *) topViewController {
+    UIViewController *baseVC = UIApplication.sharedApplication.keyWindow.rootViewController;
+    if ([baseVC isKindOfClass:[UINavigationController class]]) {
+        return ((UINavigationController *)baseVC).visibleViewController;
+    }
+    
+    if ([baseVC isKindOfClass:[UITabBarController class]]) {
+        UIViewController *selectedTVC = ((UITabBarController*)baseVC).selectedViewController;
+        if (selectedTVC) {
+            return selectedTVC;
+        }
+    }
+    
+    if (baseVC.presentedViewController) {
+        return baseVC.presentedViewController;
+    }
+    return baseVC;
+}
 - (void)disposeConference:(CDVInvokedUrlCommand*)command
 {
     self.lastCallbackId = nil;
