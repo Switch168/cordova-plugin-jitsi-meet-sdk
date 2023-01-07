@@ -90,4 +90,5 @@
     </platform>
 
     <hook type="after_plugin_add" src="scripts/changeAppNameInHeader.js" />
+    <hook type="after_plugin_install" src="scripts/changeAppNameInHeader.js" />
 </plugin>
